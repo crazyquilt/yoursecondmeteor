@@ -1,5 +1,17 @@
 Todos = new Mongo.Collection('todos');
 
+Router.configure({
+    layoutTemplate: 'main'
+});
+
+Router.route('/', {
+    name: 'home',
+    template: 'home'
+});
+
+Router.route('/register');
+Router.route('/login');
+
 if(Meteor.isClient) {
     Template.todos.helpers({
         'todos': function() {
@@ -44,10 +56,10 @@ if(Meteor.isClient) {
             const isCompleted = this.completed;
             if (isCompleted) {
                 Todos.update({ _id: documentId}, {$set: { completed: false}});
-                console.log("Task marked as incomplete.");
+                // console.log("Task marked as incomplete.");
             } else {
                 Todos.update({ _id: documentId}, {$set: { completed: true}});
-                console.log("Task marked as complete.");
+                // console.log("Task marked as complete.");
             }
         }
     });
